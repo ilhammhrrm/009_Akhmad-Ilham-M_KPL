@@ -19,11 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row["password"])) {
             $_SESSION["user_id"] = $row["id"];
-            // Reset jumlah percobaan login jika berhasil login
             $_SESSION['login_attempts'] = 0;
             echo "Login berhasil!";
         } else {
-            // Increment jumlah percobaan login yang gagal
             $_SESSION['login_attempts'] = isset($_SESSION['login_attempts']) ? $_SESSION['login_attempts'] + 1 : 1;
             echo "Kata sandi salah.";
         }
@@ -31,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Pengguna tidak ditemukan.";
     }
     
-    // Menyimpan waktu login terakhir
     $_SESSION['login_time'] = time();
 }
 ?>
@@ -56,8 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </br>
                 <input type="submit" value="Login">
             </form>
-            
-            <!-- Tambahkan tautan ke halaman sign up -->
             <p>Belum punya akun? <a href="signup.php">Daftar di sini</a></p>
         </div>
     </div>
